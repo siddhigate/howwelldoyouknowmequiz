@@ -54,12 +54,13 @@ function play(question,options,answer){
   }
 
   var userAnswer = readlineSync.question(chalk.green("Enter your answer: "));
+  
   if(answer.toUpperCase() === userAnswer.toUpperCase()){
-    console.log(chalk.yellowBright.bold("Correct!"));
+    console.log(chalk.yellowBright.bold("CORRECT!"));
     currentplayer.score = parseInt(currentplayer.score)+1;
   }
   else{
-    console.log(chalk.redBright("Wrong"))
+    console.log(chalk.redBright("WRONG"))
   }
   
   console.log(chalk.blueBright("Current Score is: "+currentplayer.score));
@@ -151,9 +152,9 @@ var secondhighscore={score:8, name:"Om"};
 
 if(currentplayer.score>highscore1.score){
   
-  console.log(chalk.yellow("Yayy, You have beaten the high score!"));
+  console.log(chalk.yellow.bold("Yayy, You have beaten the high score!"));
   emptyLine();
-  console.log(chalk.green("Take a screenshot and share it with me :)"))
+  
   
   emptyLine();colorLine();
   console.log(chalk.yellowBright.bold("HIGH SCORES: "));
@@ -163,7 +164,7 @@ if(currentplayer.score>highscore1.score){
 
 }
 else if(currentplayer.score==highscore1.score){
-  console.log(chalk.yellow("Yayy, You are the highest scorer!"));
+  console.log(chalk.yellow.bold("Yayy, You are the highest scorer!"));
   
   emptyLine();colorLine();
   console.log(chalk.yellowBright.bold("HIGH SCORES: "));
@@ -173,7 +174,7 @@ else if(currentplayer.score==highscore1.score){
 
 }
 else{
-  console.log(chalk.yellow("You didn't beat the high score :("));
+  console.log(chalk.yellow.bold("You didn't beat the high score :("));
   
   emptyLine();colorLine();
   console.log(chalk.yellowBright.bold("HIGH SCORES: "));
