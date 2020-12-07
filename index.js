@@ -27,12 +27,15 @@ function rules(){
 console.log(chalk.green.bold("Welcome to DO YOU KNOW SIDDHI? quiz"));
 emptyLine(); colorLine(); emptyLine();
 
+// current player object
+var currentplayer ={score:"0",name:""};
+
 // username input
-var username = readlineSync.question(chalk.blueBright.bold("What's your name? "));
+currentplayer.name = readlineSync.question(chalk.blueBright.bold("What's your name? "));
 emptyLine();emptyLine();
 
 // saying hello to user 
-console.log(chalk.bold.yellowBright("HELLO "+username.toUpperCase()) );
+console.log(chalk.bold.yellowBright("HELLO "+currentplayer.name.toUpperCase()) );
 
 // decoration
 emptyLine();colorLine();emptyLine();
@@ -40,8 +43,6 @@ emptyLine();colorLine();emptyLine();
 // calling function to display rules
 rules();
 
-// score 
-var score = 0;
 
 function play(question,options,answer){
   emptyLine();
@@ -55,13 +56,13 @@ function play(question,options,answer){
   var userAnswer = readlineSync.question(chalk.green("Enter your answer: "));
   if(answer.toUpperCase() === userAnswer.toUpperCase()){
     console.log(chalk.yellowBright.bold("Correct!"));
-    score++;
+    currentplayer.score = parseInt(currentplayer.score)+1;
   }
   else{
     console.log(chalk.redBright("Wrong"))
   }
   
-  console.log(chalk.blueBright("Current Score is: "+score));
+  console.log(chalk.blueBright("Current Score is: "+currentplayer.score));
   emptyLine()
   colorLine()
 
@@ -70,59 +71,59 @@ function play(question,options,answer){
 
 // question objects
 var questionOne = {
-  question: "What's my favorite color?",
+  question: "1) What's my favorite color?",
   options: ["pink","blue","yellow","green"],
   answer: "2"
 }
 
 var questionTwo = {
-  question: "What was my favorite cartoon when i was a child?",
+  question: "2) What was my favorite cartoon when i was a child?",
   options: ["doraemon","ninja hattori","shinchan","looney tunes"],
   answer: "3"
 }
 
 var questionThree = {
-  question: "What's my favorite animated movie of all time?",
+  question: "3) What's my favorite animated movie of all time?",
   options: ["Frozen","Inside Out","Toy Story","Ratatouille"],
   answer: "4"
 }
 
 var questionFour = {
-  question: "What's my favorite movie series?",
+  question: "4) What's my favorite series?",
   options: ["Stranger Things","The Office","Brooklyn 99","All of the above"],
   answer: "4"
 }
 
 var questionFive = {
-  question: "What am i afraid of the most",
+  question: "5) What am i afraid of the most",
   options: ["Cockroach","Lizard","Spider","Both A and B"],
   answer: "4"
 }
 
 var questionSix = {
-  question: "Do i like waking up early or staying up late?",
+  question: "6) Do i like waking up early or staying up late?",
   options: ["Waking up early","Staying up late","Depends on the situation","None of the above"],
   answer: "1"
 }
 var questionSeven = {
-  question: "Which is my favorite season?",
+  question: "7) Which is my favorite season?",
   options: ["Summer","Winter","Monsoon","Autumn"],
   answer: "1"
 }
 
 var questionEight = {
-  question: "What's my favorite fruit?",
+  question: "8) What's my favorite fruit?",
   options: ["Mango","Watermelon","Kiwi","Orange"],
   answer: "2"
 }
 var questionNine = {
-  question: "What's my favorite food?",
+  question: "9) What's my favorite food?",
   options: ["Pizza","Burger","Pani Puri","Paneer"],
   answer: "4"
 }
 
 var questionTen = {
-  question: "What's my favorite game",
+  question: "10) What's my favorite game",
   options: ["Green Farm 3 ","Candy Crush","Among us","Ludo"],
   answer: "2"
 }
@@ -140,13 +141,52 @@ for(var i=0;i<questions.length;i++){
 emptyLine();
 
 // displaying final score
-console.log(chalk.bold.cyanBright("FINAL SCORE is: ")+chalk.bold.yellowBright(score));
+console.log(chalk.bold.cyanBright("FINAL SCORE is: ")+chalk.bold.yellowBright(currentplayer.score)+"/10");
 
 emptyLine();colorLine();emptyLine();
 
-// 
+// high scores
+var highscore1={ score:9, name:"Manisha"};
+var secondhighscore={score:8, name:"Om"};
+
+if(currentplayer.score>highscore1.score){
+  
+  console.log(chalk.yellow("Yayy, You have beaten the high score!"));
+  emptyLine();
+  console.log(chalk.green("Take a screenshot and share it with me :)"))
+  
+  emptyLine();colorLine();
+  console.log(chalk.yellowBright.bold("HIGH SCORES: "));
+  displayScoreName(currentplayer);
+  displayScoreName(highscore1);
+  displayScoreName(secondhighscore);
+
+}
+else if(currentplayer.score==highscore1.score){
+  console.log(chalk.yellow("Yayy, You are the highest scorer!"));
+  
+  emptyLine();colorLine();
+  console.log(chalk.yellowBright.bold("HIGH SCORES: "));
+  displayScoreName(highscore1);
+  displayScoreName(currentplayer);
+  displayScoreName(secondhighscore);
+
+}
+else{
+  console.log(chalk.yellow("You didn't beat the high score :("));
+  
+  emptyLine();colorLine();
+  console.log(chalk.yellowBright.bold("HIGH SCORES: "));
+  displayScoreName(highscore1);
+  displayScoreName(secondhighscore);
+  displayScoreName(currentplayer);
+}
 
 
-console.log(chalk.green("Take a screenshot and share it with me :)"))
+function displayScoreName({score,name}){
+  console.log(chalk.greenBright.bold(score)+chalk.greenBright.bold("/10")+"  "+chalk.greenBright.bold(name));
+}
 
-emptyLine();colorLine();
+emptyLine(); colorLine();emptyLine();
+  console.log(chalk.yellow("Take a screenshot and share it with me :)"))
+emptyLine(); colorLine();
